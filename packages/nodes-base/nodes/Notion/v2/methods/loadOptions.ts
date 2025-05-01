@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import type { IDataObject, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
+import { IDataObject, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 
 import {
 	extractPageId,
@@ -129,10 +129,7 @@ export async function getDatabaseIdFromPage(
 	const pageId = extractPageId(
 		this.getCurrentNodeParameter('pageId', { extractValue: true }) as string,
 	);
-	const {
-		parent: { database_id: databaseId },
-	} = await notionApiRequest.call(this, 'GET', `/pages/${pageId}`);
-	const { properties } = await notionApiRequest.call(this, 'GET', `/databases/${databaseId}`);
+	const { properties } = await notionApiRequest.call(this, 'GET', `/pages/${pageId}`);
 	for (const key of Object.keys(properties as IDataObject)) {
 		//remove parameters that cannot be set from the API.
 		if (
@@ -169,15 +166,14 @@ export async function getDatabaseOptionsFromPage(
 	const pageId = extractPageId(
 		this.getCurrentNodeParameter('pageId', { extractValue: true }) as string,
 	);
-	const [name, type] = (this.getCurrentNodeParameter('&key') as string).split('|');
-	const {
-		parent: { database_id: databaseId },
-	} = await notionApiRequest.call(this, 'GET', `/pages/${pageId}`);
-	const { properties } = await notionApiRequest.call(this, 'GET', `/databases/${databaseId}`);
-	return properties[name][type].options.map((option: IDataObject) => ({
-		name: option.name,
-		value: option.name,
-	}));
+	const { properties } = await notionApiRequest.call(this, 'GET', `/pages/${pageId}`);
+
+	return [
+		{
+			name: properties[name][type].name,
+			value: properties[name][type].name,
+		},
+	];
 }
 
 // Get all the timezones to display them to user so that they can

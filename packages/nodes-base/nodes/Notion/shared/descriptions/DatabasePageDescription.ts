@@ -764,34 +764,34 @@ export const databasePageFields: INodeProperties[] = [
 					{
 						displayName: 'Option Name or ID',
 						name: 'selectValue',
-						type: 'options',
+						type: 'string',
 						description:
-							'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
-						typeOptions: {
-							loadOptionsMethod: 'getDatabaseOptionsFromPage',
-						},
+							'Specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>, but for now not able to get options from the page, type an option that exists on your databasePage',
+						default: '',
 						displayOptions: {
 							show: {
 								type: ['select'],
 							},
+							hide: {
+								'@version': [1],
+							},
 						},
-						default: '',
 					},
 					{
 						displayName: 'Status Name or ID',
 						name: 'statusValue',
-						type: 'options',
-						typeOptions: {
-							loadOptionsMethod: 'getDatabaseOptionsFromPage',
-						},
+						type: 'string',
+						description:
+							'Specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>, but for now not able to get options from the page, type an option that exists on your databasePage',
+						default: '',
 						displayOptions: {
 							show: {
 								type: ['status'],
 							},
+							hide: {
+								'@version': [1],
+							},
 						},
-						default: '',
-						description:
-							'Name of the option you want to set. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 					},
 					{
 						displayName: 'Email',
