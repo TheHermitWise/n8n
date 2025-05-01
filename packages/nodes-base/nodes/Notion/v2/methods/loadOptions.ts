@@ -167,6 +167,7 @@ export async function getDatabaseOptionsFromPage(
 		this.getCurrentNodeParameter('pageId', { extractValue: true }) as string,
 	);
 	const { properties } = await notionApiRequest.call(this, 'GET', `/pages/${pageId}`);
+	const [name, type] = (this.getCurrentNodeParameter('&key') as string).split('|');
 
 	return [
 		{
