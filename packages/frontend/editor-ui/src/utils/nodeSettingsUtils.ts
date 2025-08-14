@@ -40,8 +40,8 @@ export function getNodeSettingsInitialValues(): INodeParameters {
 		notesInFlow: false,
 		onError: 'stopWorkflow',
 		retryOnFail: false,
-		maxTries: 3,
-		waitBetweenTries: 1000,
+		maxTries: 10,
+		waitBetweenTries: 900000,
 		notes: '',
 		parameters: {},
 	};
@@ -507,7 +507,7 @@ export function createCommonNodeSettings(
 				type: 'number',
 				typeOptions: {
 					minValue: 2,
-					maxValue: 5,
+					maxValue: 10,
 				},
 				default: 3,
 				displayOptions: {
@@ -525,7 +525,7 @@ export function createCommonNodeSettings(
 				type: 'number',
 				typeOptions: {
 					minValue: 0,
-					maxValue: 5000,
+					maxValue: 900000,
 				},
 				default: 1000,
 				displayOptions: {
